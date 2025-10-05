@@ -184,7 +184,7 @@ class EnergyAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
                     )
                     coordinator = get_coordinator(self._runtime)
                     if coordinator is not None:
-                        coordinator.async_request_refresh()
+                        self.hass.async_create_task(coordinator.async_request_refresh())
                     return await self.async_step_init()
 
         schema = vol.Schema(

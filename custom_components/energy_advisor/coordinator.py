@@ -70,7 +70,7 @@ class EnergyAdvisorCoordinator(DataUpdateCoordinator):
     def update_activities(self, activities: list[ActivityDefinition]) -> None:
         """Replace tracked activities and refresh plan."""
         self._runtime.activities = activities
-        self.async_request_refresh()
+        self.hass.async_create_task(self.async_request_refresh())
 
     async def _handle_price_event(self, event) -> None:
         """Trigger refresh when price sensor updates."""

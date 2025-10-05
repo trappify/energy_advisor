@@ -34,12 +34,12 @@ class DummyCoordinator:
         self.activity_updates: list | None = None
         self.refresh_requested = False
 
-    def async_request_refresh(self) -> None:
+    async def async_request_refresh(self) -> None:
         self.refresh_requested = True
 
     def update_activities(self, activities) -> None:
         self.activity_updates = activities
-        self.async_request_refresh()
+        self.refresh_requested = True
 
 
 @pytest.fixture

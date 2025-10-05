@@ -130,7 +130,7 @@ async def _handle_recompute(hass: HomeAssistant, call: ServiceCall) -> None:
     for runtime in _iter_target_runtimes(hass, call.data):
         coordinator: EnergyAdvisorCoordinator | None = get_coordinator(runtime)
         if coordinator is not None:
-            coordinator.async_request_refresh()
+            await coordinator.async_request_refresh()
 
 
 async def _handle_export(hass: HomeAssistant, call: ServiceCall) -> dict[str, Any]:
