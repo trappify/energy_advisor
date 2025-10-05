@@ -1,0 +1,8 @@
+{
+  "name": "Energy Advisor",
+  "content_in_root": false,
+  "domains": ["sensor"],
+  "country": ["SE"],
+  "homeassistant": "2024.12.0",
+  "render_readme": true
+}

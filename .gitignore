@@ -35,3 +35,5 @@ Thumbs.db
 
 # Node/npm (if used later)
 node_modules/
+
+dist/
