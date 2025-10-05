@@ -1,0 +1,79 @@
+{
+  "config": {
+    "title": "Energy Advisor",
+    "step": {
+      "user": {
+        "title": "Energy Advisor setup",
+        "description": "Select the energy price sensor and default scheduling window.",
+        "data": {
+          "price_sensor": "Energy price sensor",
+          "slot_minutes": "Slot length (minutes)",
+          "window_start": "Window start (HH:MM)",
+          "window_end": "Window end (HH:MM)",
+          "timezone": "Timezone override"
+        }
+      }
+    },
+    "error": {
+      "no_sensors": "No compatible price sensor detected.",
+      "invalid_time": "Please provide times in HH:MM format.",
+      "invalid_slot": "Slot length must be a positive number.",
+      "invalid_selection": "Select a sensor from the list."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Energy Advisor options",
+        "data": {
+          "operation": "Action"
+        }
+      },
+      "global": {
+        "title": "Scheduling defaults",
+        "data": {
+          "slot_minutes": "Slot length (minutes)",
+          "window_start": "Window start (HH:MM)",
+          "window_end": "Window end (HH:MM)",
+          "timezone": "Timezone override"
+        }
+      },
+      "add_activity": {
+        "title": "Add activity",
+        "data": {
+          "name": "Activity name",
+          "duration_minutes": "Duration (minutes)",
+          "earliest_start": "Earliest start (HH:MM)",
+          "latest_end": "Latest end (HH:MM)",
+          "priority": "Priority (lower is higher)"
+        }
+      },
+      "edit_activity": {
+        "title": "Edit activity",
+        "data": {
+          "name": "Activity name",
+          "duration_minutes": "Duration (minutes)",
+          "earliest_start": "Earliest start (HH:MM)",
+          "latest_end": "Latest end (HH:MM)",
+          "priority": "Priority (lower is higher)"
+        }
+      },
+      "edit_activity_select": {
+        "title": "Select activity",
+        "data": {
+          "activity_id": "Activity"
+        }
+      },
+      "remove_activity": {
+        "title": "Remove activity",
+        "data": {
+          "activity_id": "Activity"
+        }
+      }
+    },
+    "error": {
+      "invalid_time": "Please provide times in HH:MM format.",
+      "activity_not_found": "Activity could not be located."
+    }
+  }
+}

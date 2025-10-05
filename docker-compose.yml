@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  homeassistant:
+    container_name: energy-advisor-ha
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+    volumes:
+      - ./.homeassistant:/config
+      - ./custom_components:/config/custom_components
+    environment:
+      - TZ=Europe/Stockholm
+    ports:
+      - "8123:8123"
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import socket; s=socket.socket(); s.connect(('localhost',8123))"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

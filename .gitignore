@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+ENV/
+.python-version
+
+# Home Assistant runtime data
+.homeassistant/*.db
+.homeassistant/*.log
+.homeassistant/deps/
+.homeassistant/home-assistant_v2.db*
+.homeassistant/.storage/
+.homeassistant/.cloud/
+.homeassistant/.HA_VERSION
+.homeassistant/blueprints/
+.homeassistant/backup/
+
+# Development tooling
+.idea/
+.vscode/
+.mypy_cache/
+pytest_cache/
+.coverage
+htmlcov/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Docker
+.env
+
+# Node/npm (if used later)
+node_modules/

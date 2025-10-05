@@ -1,0 +1,12 @@
+{
+  "domain": "energy_advisor",
+  "name": "Energy Advisor",
+  "codeowners": ["@trappify"],
+  "documentation": "https://github.com/trappify/energy_advisor",
+  "issue_tracker": "https://github.com/trappify/energy_advisor/issues",
+  "version": "0.1.0",
+  "iot_class": "local_polling",
+  "integration_type": "hub",
+  "requirements": [],
+  "config_flow": true
+}

@@ -1,0 +1,16 @@
+# Minimal Home Assistant configuration for Energy Advisor integration testing
+homeassistant:
+  name: Energy Advisor Lab
+  latitude: 59.3293
+  longitude: 18.0686
+  elevation: 28
+  unit_system: metric
+  time_zone: Europe/Stockholm
+
+# Enable default integrations helpful during development
+default_config:
+
+logger:
+  default: warning
+  logs:
+    custom_components.energy_advisor: debug
