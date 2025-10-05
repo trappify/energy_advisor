@@ -30,6 +30,7 @@ Custom Home Assistant integration that suggests low-cost time slots for energy i
 - Lint/format (ruff): `ruff check .`
 - Package release artifact: `./scripts/build_release.sh <version>` → outputs `dist/energy_advisor-<version>.zip`
 - Install HACS in the dev lab: `./scripts/install_hacs.sh`
+- Install Nordpool custom integration: `./scripts/install_nordpool.sh`
 - Local Home Assistant lab: `docker compose up`
 
 Additional architecture notes and HACS validation steps live under `docs/`.

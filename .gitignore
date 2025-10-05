@@ -9,6 +9,7 @@ ENV/
 
 # Home Assistant runtime data
 .homeassistant/custom_components/hacs/
+.homeassistant/custom_components/nordpool/
 .homeassistant/*.db
 .homeassistant/*.log*
 .homeassistant/deps/

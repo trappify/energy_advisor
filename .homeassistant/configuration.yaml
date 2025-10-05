@@ -15,3 +15,74 @@ logger:
   default: warning
   logs:
     custom_components.energy_advisor: debug
+
+template:
+  - sensor:
+      - name: "Mock Nordpool Price"
+        unique_id: mock_nordpool_price
+        state: 0.14
+        attributes:
+          unit_of_measurement: SEK/kWh
+          currency: SEK
+          raw_today:
+            - start: "2025-10-05T00:00:00+02:00"
+              end: "2025-10-05T00:15:00+02:00"
+              value: 0.128
+            - start: "2025-10-05T00:15:00+02:00"
+              end: "2025-10-05T00:30:00+02:00"
+              value: 0.128
+            - start: "2025-10-05T00:30:00+02:00"
+              end: "2025-10-05T00:45:00+02:00"
+              value: 0.126
+            - start: "2025-10-05T00:45:00+02:00"
+              end: "2025-10-05T01:00:00+02:00"
+              value: 0.122
+            - start: "2025-10-05T01:00:00+02:00"
+              end: "2025-10-05T01:15:00+02:00"
+              value: 0.122
+            - start: "2025-10-05T01:15:00+02:00"
+              end: "2025-10-05T01:30:00+02:00"
+              value: 0.12
+            - start: "2025-10-05T01:30:00+02:00"
+              end: "2025-10-05T01:45:00+02:00"
+              value: 0.119
+            - start: "2025-10-05T01:45:00+02:00"
+              end: "2025-10-05T02:00:00+02:00"
+              value: 0.119
+          raw_tomorrow:
+            - start: "2025-10-06T00:00:00+02:00"
+              end: "2025-10-06T00:15:00+02:00"
+              value: 0.314
+            - start: "2025-10-06T00:15:00+02:00"
+              end: "2025-10-06T00:30:00+02:00"
+              value: 0.311
+            - start: "2025-10-06T00:30:00+02:00"
+              end: "2025-10-06T00:45:00+02:00"
+              value: 0.316
+            - start: "2025-10-06T00:45:00+02:00"
+              end: "2025-10-06T01:00:00+02:00"
+              value: 0.265
+            - start: "2025-10-06T01:00:00+02:00"
+              end: "2025-10-06T01:15:00+02:00"
+              value: 0.291
+            - start: "2025-10-06T01:15:00+02:00"
+              end: "2025-10-06T01:30:00+02:00"
+              value: 0.249
+            - start: "2025-10-06T01:30:00+02:00"
+              end: "2025-10-06T01:45:00+02:00"
+              value: 0.232
+            - start: "2025-10-06T01:45:00+02:00"
+              end: "2025-10-06T02:00:00+02:00"
+              value: 0.212
+          today: [0.128, 0.128, 0.126, 0.122, 0.122, 0.12, 0.119, 0.119]
+          tomorrow: [0.314, 0.311, 0.316, 0.265, 0.291, 0.249, 0.232, 0.212]
+          tomorrow_valid: true
+
+
+nordpool:
+  currency: SEK
+  VAT: true
+  price_in_cents: false
+  region: SE3
+  offset: 0
+  additional_costs: 0
