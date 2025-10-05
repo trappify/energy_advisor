@@ -6,6 +6,7 @@ homeassistant:
   elevation: 28
   unit_system: metric
   time_zone: Europe/Stockholm
+  country: SE
 
 # Enable default integrations helpful during development
 default_config:
