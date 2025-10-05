@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./.homeassistant:/config
-      - ./custom_components:/config/custom_components
+      - ./custom_components/energy_advisor:/config/custom_components/energy_advisor
     environment:
       - TZ=Europe/Stockholm
     ports:
