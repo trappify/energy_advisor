@@ -5,6 +5,7 @@ This project targets HACS distribution. Use the checklist below whenever we cut 
 ## Prerequisites
 - Local Home Assistant dev lab running via `docker compose up` (see repository README).
 - HACS installed inside the dev lab (run `./scripts/install_hacs.sh` to download and place the latest release under `/config/custom_components/hacs`).
+- Nordpool custom integration installed via `./scripts/install_nordpool.sh` to provide SE3 price data.
 - Create a long-lived access token in Home Assistant for the HACS onboarding wizard (one-time setup inside the test instance).
 
 ## Package Sanity Checks

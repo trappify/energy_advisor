@@ -86,3 +86,11 @@ nordpool:
   region: SE3
   offset: 0
   additional_costs: 0
+
+sensor:
+  - platform: nordpool
+    region: SE3
+    currency: SEK
+    VAT: true
+    price_in_cents: false
+    additional_costs: 0
