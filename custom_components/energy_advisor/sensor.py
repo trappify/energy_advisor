@@ -96,5 +96,4 @@ class EnergyAdvisorPlanSensor(CoordinatorEntity[EnergyAdvisorCoordinator], Senso
         return DeviceInfo(
             identifiers={(DOMAIN, self._entry.entry_id)},
             name="Energy Advisor",
-            configuration_url="/config/integrations/integration/energy_advisor",
         )

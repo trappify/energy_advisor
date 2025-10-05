@@ -33,8 +33,10 @@ def extract_price_points(hass: HomeAssistant, entity_id: str) -> list[PricePoint
 
     points: list[PricePoint] = []
     for entry in raw:
-        start = dt_util.parse_datetime(entry["start"])
-        end = dt_util.parse_datetime(entry["end"])
+        start_raw = entry["start"]
+        end_raw = entry["end"]
+        start = start_raw if isinstance(start_raw, datetime) else dt_util.parse_datetime(start_raw)
+        end = end_raw if isinstance(end_raw, datetime) else dt_util.parse_datetime(end_raw)
         if start is None or end is None:
             continue
         price = Decimal(str(entry["value"]))
