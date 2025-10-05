@@ -19,12 +19,16 @@ class DummyCoordinator:
     def __init__(self, hass, data):
         self.hass = hass
         self.data = data
+        self._activity_names = {"wash": "Washer"}
 
     def async_add_listener(self, update_callback):
         return lambda: None
 
     def async_request_refresh(self):
         return None
+
+    def get_activity_name(self, activity_id: str):
+        return self._activity_names.get(activity_id)
 
 
 async def test_plan_sensor_exposes_attributes(hass) -> None:
@@ -63,4 +67,5 @@ async def test_plan_sensor_exposes_attributes(hass) -> None:
 
     attributes = sensor.extra_state_attributes
     assert attributes["activities"][0]["activity_id"] == "wash"
+    assert attributes["activities"][0]["name"] == "Washer"
     assert attributes["total_cost"] == str(plan.total_cost)

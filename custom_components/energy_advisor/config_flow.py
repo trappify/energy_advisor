@@ -10,6 +10,7 @@ import voluptuous as vol
 
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.update_coordinator import UpdateFailed
 
 from .config import build_entry_data
 from .const import (
@@ -23,6 +24,7 @@ from .const import (
     DEFAULT_WINDOW_END,
     DEFAULT_WINDOW_START,
     DOMAIN,
+    LOGGER,
 )
 from .manager import EnergyAdvisorRuntimeData, async_save_activities, get_coordinator
 from .models import ActivityDefinition, EnergyAdvisorConfig
@@ -184,7 +186,7 @@ class EnergyAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
                     )
                     coordinator = get_coordinator(self._runtime)
                     if coordinator is not None:
-                        self.hass.async_create_task(coordinator.async_request_refresh())
+                        await _safe_refresh(coordinator)
                     return await self.async_step_init()
 
         schema = vol.Schema(
@@ -211,7 +213,7 @@ class EnergyAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
                 await async_save_activities(self._runtime, activities)
                 coordinator = get_coordinator(self._runtime)
                 if coordinator is not None:
-                    coordinator.update_activities(activities)
+                    await _safe_update_activities(coordinator, activities)
                 return await self.async_step_init()
 
         schema = _activity_schema()
@@ -251,7 +253,7 @@ class EnergyAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
                 await async_save_activities(self._runtime, new_activities)
                 coordinator = get_coordinator(self._runtime)
                 if coordinator is not None:
-                    coordinator.update_activities(new_activities)
+                    await _safe_update_activities(coordinator, new_activities)
                 self._selected_activity_id = None
                 return await self.async_step_init()
 
@@ -290,8 +292,14 @@ class EnergyAdvisorOptionsFlowHandler(config_entries.OptionsFlow):
         await async_save_activities(self._runtime, new_activities)
         coordinator = get_coordinator(self._runtime)
         if coordinator is not None:
-            coordinator.update_activities(new_activities)
+            await _safe_update_activities(coordinator, new_activities)
         return await self.async_step_init()
+
+    async def async_step_edit_activity_select(
+        self, user_input: Mapping[str, Any] | None = None
+    ):
+        """Proxy handler for legacy step id."""
+        return await self.async_step_edit_activity(user_input=user_input)
 
 
 def _discover_price_sensors(hass: HomeAssistant) -> dict[str, str]:
@@ -359,3 +367,23 @@ def _build_activity_from_user_input(
         latest_end=latest,
         priority=priority,
     )
+
+
+async def _safe_refresh(coordinator: EnergyAdvisorCoordinator) -> None:
+    """Refresh while swallowing planner errors."""
+    try:
+        await coordinator.async_refresh()
+    except UpdateFailed as exc:  # pragma: no cover - defensive guard
+        LOGGER.warning("Plan refresh failed during options flow: %s", exc)
+
+
+async def _safe_update_activities(
+    coordinator: EnergyAdvisorCoordinator, activities: list[ActivityDefinition]
+) -> None:
+    """Update activities and refresh without surfacing flow errors."""
+    try:
+        await coordinator.async_update_activities(activities)
+    except UpdateFailed as exc:  # pragma: no cover - defensive guard
+        LOGGER.warning("Plan refresh failed after activity change: %s", exc)
+    except Exception as exc:  # pragma: no cover - defensive guard
+        LOGGER.exception("Unexpected error updating activities: %s", exc)

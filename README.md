@@ -15,12 +15,29 @@ Custom Home Assistant integration that suggests low-cost time slots for energy i
 1. Download the latest archive generated via `./scripts/build_release.sh` or grab the repository ZIP.
 2. Extract the archive so that `custom_components/energy_advisor` sits inside your Home Assistant `/config/custom_components/` directory.
 3. Restart Home Assistant and add the integration through the UI.
+4. (Optional) Install the companion Lovelace card from `https://github.com/trappify/energy_advisor_ui` following its README.
 
 ## Services & Entities
 
 - `sensor.energy_advisor_plan`: exposes the computed schedule with per-activity details.
 - `energy_advisor.recompute_plan`: force a planner refresh.
 - `energy_advisor.export_plan`: return the latest plan payload.
+
+## Lovelace Plan Card
+
+The visual dashboard lives in the dedicated UI repository: `https://github.com/trappify/energy_advisor_ui`.
+
+- Add that repository to HACS (Category: Dashboard) or follow its manual install notes.
+- Add the resource in *Settings → Dashboards → Resources* using the path documented in the UI repo.
+- Place the card on any dashboard with YAML or UI editor. New installs create `sensor.energy_advisor_plan`; older installs can rename their existing plan sensor under *Settings → Devices & Services → Energy Advisor* if desired:
+
+```yaml
+type: custom:energy-advisor-plan-card
+entity: sensor.energy_advisor_plan
+title: Energy plan for the family
+```
+
+The card groups upcoming activities into “Today/Tomorrow” sections with colour-coded cost hints so the schedule is easy to read at a glance.
 
 ## Development
 

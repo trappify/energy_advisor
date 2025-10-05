@@ -67,15 +67,25 @@ class EnergyAdvisorCoordinator(DataUpdateCoordinator):
 
         return plan
 
-    def update_activities(self, activities: list[ActivityDefinition]) -> None:
+    async def async_update_activities(self, activities: list[ActivityDefinition]) -> None:
         """Replace tracked activities and refresh plan."""
         self._runtime.activities = activities
-        self.hass.async_create_task(self.async_request_refresh())
+        try:
+            await self.async_refresh()
+        except UpdateFailed as exc:
+            LOGGER.warning("Activity update failed to refresh plan: %s", exc)
+
+    def get_activity_name(self, activity_id: str) -> str | None:
+        """Return the configured label for an activity."""
+        for activity in self._runtime.activities:
+            if activity.id == activity_id:
+                return activity.name
+        return None
 
     async def _handle_price_event(self, event) -> None:
         """Trigger refresh when price sensor updates."""
         LOGGER.debug("Price sensor %s changed; triggering refresh", self._runtime.config.price_sensor)
-        await self.async_request_refresh()
+        await self.async_refresh()
 
     async def async_unload(self) -> None:
         """Clean up listeners."""

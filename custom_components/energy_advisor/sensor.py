@@ -43,8 +43,9 @@ class EnergyAdvisorPlanSensor(CoordinatorEntity[EnergyAdvisorCoordinator], Senso
     """Sensor exposing the computed plan."""
 
     _attr_has_entity_name = True
-    _attr_name = ENTITY_NAME
+    _attr_name = "Plan"
     _attr_icon = ENTITY_ICON
+    _attr_suggested_object_id = "energy_advisor_plan"
 
     def __init__(self, coordinator: EnergyAdvisorCoordinator, entry: ConfigEntry) -> None:
         super().__init__(coordinator)
@@ -74,6 +75,7 @@ class EnergyAdvisorPlanSensor(CoordinatorEntity[EnergyAdvisorCoordinator], Senso
             ATTR_PLAN_ACTIVITIES: [
                 {
                     "activity_id": activity.activity_id,
+                    "name": self.coordinator.get_activity_name(activity.activity_id),
                     "start": activity.start.isoformat(),
                     "end": activity.end.isoformat(),
                     "cost": str(activity.cost),
