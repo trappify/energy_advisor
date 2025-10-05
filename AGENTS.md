@@ -33,6 +33,7 @@
 _Keep this file updated as milestones progress; note blockers, decisions, and open issues._
 
 ## Progress Log
+- [x] Added automation to install HACS via container script for dev lab (2025-02-14).
 - [x] HACS readiness: Added hacs.json, release packaging script, documentation, and README install steps (2025-02-14).
 - [x] Phase 2 implementation: Delivered config flow, coordinator, planner, storage, services, and test suite (2025-02-14).
 - [x] Phase 2 design: Authored architecture plan covering config flow, planner, and test strategy (2025-02-14).

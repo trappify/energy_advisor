@@ -8,8 +8,9 @@ ENV/
 .python-version
 
 # Home Assistant runtime data
+.homeassistant/custom_components/hacs/
 .homeassistant/*.db
-.homeassistant/*.log
+.homeassistant/*.log*
 .homeassistant/deps/
 .homeassistant/home-assistant_v2.db*
 .homeassistant/.storage/
@@ -18,6 +19,7 @@ ENV/
 .homeassistant/blueprints/
 .homeassistant/backup/
 
+.homeassistant/.ha_run.lock
 # Development tooling
 .idea/
 .vscode/
